@@ -54,23 +54,13 @@ func md5_myself(str string) string  {
 
 func upper(ws *websocket.Conn) {
 	var err error
-	var reply string
 	fmt.Println("has connect")
-	if err = websocket.Message.Receive(ws, &reply); err != nil {
-		ws.Close()
-		return
-	}
-	if reply != "ping" {
-		ws.Close()
-	} else {
-		if err = websocket.Message.Send(ws, "over"); err != nil {
-			fmt.Println(err)
-		}
+	if err = websocket.Message.Send(ws, "over"); err != nil {
+		fmt.Println(err)
 	}
 	current_md5_str := md5_str
 	for {
 		md5_str = ""
-		time.Sleep(time.Second*3)
 		need_dir_time(cwdPath)
 		if current_md5_str != md5_str {
 			current_md5_str = md5_str
@@ -79,6 +69,7 @@ func upper(ws *websocket.Conn) {
 				return
 			}
 		}
+		time.Sleep(time.Second)
 	}
 }
 
