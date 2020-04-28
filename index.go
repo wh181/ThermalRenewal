@@ -70,6 +70,7 @@ func upper(ws *websocket.Conn) {
 	current_md5_str := md5_str
 	for {
 		md5_str = ""
+		time.Sleep(time.Second*3)
 		need_dir_time(cwdPath)
 		if current_md5_str != md5_str {
 			current_md5_str = md5_str
@@ -78,7 +79,6 @@ func upper(ws *websocket.Conn) {
 				return
 			}
 		}
-		time.Sleep(time.Second)
 	}
 }
 
