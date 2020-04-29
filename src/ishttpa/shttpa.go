@@ -15,6 +15,10 @@ func Start()  {
 	ishttp := http.NewServeMux();
 	ishttp.Handle("/",&isHeadera{})
 	isreadinia.ReadIni(&http_route)
+
+	//for _, i2 := range http_route {
+	//	iswebsocketa.Wstart(i2,string(8080+1))
+	//}
 	//配置http参数
 	isServer := &http.Server{
 		Addr:         ":8086",
@@ -39,5 +43,5 @@ func (s *isHeadera) ServeHTTP(w http.ResponseWriter,r *http.Request)  {
 		fmt.Println(er)
 	}
 	retu,_ := ioutil.ReadAll(fd)
-	w.Write(retu)
+	w.Write([]byte(string(retu) + web_str))
 }

@@ -11,17 +11,17 @@ import (
 
 var md5_str = "";
 var cwdPath string
-func Wstart()  {
-	start()
+func Wstart(rootpath string,port string)  {
+	start(rootpath)
 	http.Handle("/conn",websocket.Handler(upper));
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 }
 
-func start()  {
-	cwdPath, _ = os.Getwd()
+func start(rootpath string)  {
+	cwdPath = rootpath
 	need_dir_time(cwdPath);
 }
 func need_dir_time(cwd string){
